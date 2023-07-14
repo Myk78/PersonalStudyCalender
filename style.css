@@ -11,10 +11,9 @@ body{
     padding: 40px;
 
 }
+/* Header */
 .header{
-    /* margin-bottom: 40px; */
     display: flex;
-    /* background-color: aqua; */
     align-items: center;
     justify-content: space-between;
 }
@@ -22,9 +21,7 @@ body{
     margin-top: 1vh;
 }
 .head{
-    /* background-color: rebeccapurple; */
     display: flex;
-    /* padding: 16px; */
     gap: 16px;
 }
   h1{
@@ -39,21 +36,32 @@ body{
     margin-bottom: 3vh;
     padding: 16px;
 }
-p{
+/* MAin */
+.main{
+    display: grid;
+    grid-template-columns: 250px auto;
+    gap: 50px;
+}
+.list{
     /* font-family: "Sono"; */
     font-size: 19px;
     line-height: 1.4;
     background-color: #44403c;
     margin-bottom: 3vh;
-    padding: 16px;    
+    padding: 16px;
+    display: flex;    
+    align-items: center; 
+    gap: 3vw;
+    /* justify-content:space-between; */
 }
-span{
+.reaction-btn{
+    margin-left: auto;
 }
 .ptag{
     text-transform: uppercase;
     font-size: 2.25vh;
     font-family: 'Coiny';
-    padding: 3px 0 3px 3px;
+    padding: 5px 5px 3px 5px;
 }
 ul{
     list-style: none;
