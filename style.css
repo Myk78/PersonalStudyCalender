@@ -1,32 +1,59 @@
   @import url('https://fonts.googleapis.com/css2?family=Coiny&family=Sono&family=Ubuntu:wght@300&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
 body{
     background-color: #292524;
+    color: #fafaf9;
+    font-family: "Sono",sans-serif;
+    box-sizing: border-box;
+    padding: 40px;
+
+}
+.header{
+    /* margin-bottom: 40px; */
+    display: flex;
+    /* background-color: aqua; */
+    align-items: center;
+    justify-content: space-between;
+}
+.header img{
+    margin-top: 1vh;
+}
+.head{
+    /* background-color: rebeccapurple; */
+    display: flex;
+    /* padding: 16px; */
+    gap: 16px;
 }
   h1{
     font-size: 5vh;
     text-transform: uppercase;
-    text-align: center;
-    font-family: 'Coiny';
+    font-family: 'Coiny', sans-serif;
+    margin-bottom: 2vh;
+    padding: 16px;
 }
 .choicefrom{
     background-color:#44403c;
+    margin-bottom: 3vh;
+    padding: 16px;
 }
 p{
-    font-family: Sono;
+    /* font-family: "Sono"; */
     font-size: 19px;
     line-height: 1.4;
     background-color: #44403c;
-    color: #fafaf9;
-    
+    margin-bottom: 3vh;
+    padding: 16px;    
 }
 span{
-    color: #fafaf9;
 }
-.tag{
+.ptag{
     text-transform: uppercase;
     font-size: 2.25vh;
     font-family: 'Coiny';
-    color: #fafaf9;
+    padding: 3px 0 3px 3px;
 }
 ul{
     list-style: none;
