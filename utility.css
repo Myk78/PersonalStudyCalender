@@ -1,0 +1,29 @@
+.btn{
+    font-family: Coiny;
+    color: inherit;
+    border: none;
+    padding: 16px 0px 15px;
+    background-image: linear-gradient(135deg,#3b82f6,#16a34a,#ef4444,#eab308);
+    text-transform: uppercase;
+    line-height: 1;
+    font-size: 17px;
+}
+.btn:hover{
+    transform: scale(110%) rotate(-2deg);
+    
+}
+.btn-large{
+    padding: 18px 15px 15px;
+    font-size: 26px;
+    border-radius: 20px;
+    /* width: 100%; */
+}
+.btn-forall{
+    margin-bottom: 16px;
+    width: 100%;
+    border-radius: 20px;
+}.btn-forother{
+    margin-top: 16px;
+    width: 100%;
+    border-radius: 20px;
+}

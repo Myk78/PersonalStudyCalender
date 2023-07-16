@@ -11,6 +11,11 @@ body{
     padding: 40px;
 
 }
+.container{
+    max-width: 1500px ;
+    margin: 0 auto;
+    
+}
 /* Header */
 .header{
     display: flex;
@@ -43,7 +48,6 @@ body{
     gap: 50px;
 }
 .list{
-    /* font-family: "Sono"; */
     font-size: 19px;
     line-height: 1.4;
     background-color: #44403c;
@@ -52,7 +56,6 @@ body{
     display: flex;    
     align-items: center; 
     gap: 3vw;
-    /* justify-content:space-between; */
 }
 .reaction-btn{
     margin-left: auto;
@@ -63,6 +66,18 @@ body{
     font-family: 'Coiny';
     padding: 5px 5px 3px 5px;
 }
+.sourcelink:link,
+.sourcelink:visited{
+    color:#a8a29e;
+    text-decoration: none;
+    transition:0.3s;
+
+}
+.sourcelink:hover,
+.sourcelink:active{
+    color: #3b82f6;
+}
+
 ul{
     list-style: none;
 }
