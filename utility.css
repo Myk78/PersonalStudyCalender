@@ -13,16 +13,19 @@
     
 }
 .btn-large{
+    margin: 1vh 1vw;
     padding: 18px 15px 15px;
     font-size: 26px;
     border-radius: 20px;
     /* width: 100%; */
 }
 .btn-forall{
+    
     margin-bottom: 16px;
     width: 100%;
     border-radius: 20px;
 }.btn-forother{
+    margin: 1vh 1vw;
     margin-top: 16px;
     width: 100%;
     border-radius: 20px;
