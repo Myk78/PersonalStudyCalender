@@ -39,8 +39,37 @@ body{
 }
 .choicefrom{
     background-color:#44403c;
+    border-radius: 10px;
     margin-bottom: 3vh;
     padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+.choicefrom span{
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 20px;
+}
+.choicefrom input{
+    background-color: #78716c;
+    border: none;
+    border-radius: 10px;
+    padding: 2vh 1vw;
+    color: inherit;
+    /* width: 20vw; */
+}
+/*  Now we use flex property "flex grow" for his first child to take all extra space of their parent */
+.choicefrom input:first-child{
+    flex-grow: 1;
+}
+.choicefrom select{
+    background-color: #78716c;
+    border: none;
+    border-radius: 10px;
+    padding: 2vh 1vw;
+    color: inherit;
+    width: 10vw;
 }
 /* MAin */
 .main{
