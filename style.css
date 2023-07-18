@@ -37,6 +37,34 @@ body{
     margin-bottom: 2vh;
     padding: 16px;
 }
+/* Media Qurey */
+@media(max-width:640px){
+    .body{
+        padding: 10px;
+    }
+    .header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header h1{
+        margin-bottom: 1vh;
+        padding: 0;
+    }
+    .header button{
+        margin-bottom: 25px;
+    }
+    .head{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* another media for H1  */
+@media(max-width:420px){
+    .header h1{
+        font-size: large;
+    }
+}
 .choicefrom{
     background-color:#44403c;
     border-radius: 10px;
@@ -71,12 +99,32 @@ body{
     color: inherit;
     width: 10vw;
 }
+/* Media query for form */
+@media(max-width:890px){
+    .choicefrom{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .choicefrom select{
+        width: auto;
+    }
+}
+
 /* MAin */
+/* NOW We add media Quries individual for every class */
 .main{
     display: grid;
     grid-template-columns: 250px auto;
     gap: 50px;
 }
+@media(max-width:640px){
+    .main{
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Media Query */
 .list{
     font-size: 19px;
     line-height: 1.4;
@@ -87,6 +135,19 @@ body{
     align-items: center; 
     gap: 3vw;
 }
+@media(max-width:1340px){
+    .list{
+        flex-direction: column;
+         /*now every property of flex will change means their main axis convert in cross  */
+         /* so align-items work on now horizontal */
+         align-items: flex-end;
+    }
+/* this is tag class of list */
+    .ptag{
+        border-radius: 10%;
+    }
+}
+
 .reaction-btn{
     margin-left: auto;
     display: flex;
@@ -111,9 +172,10 @@ body{
 }
 .ptag{
     text-transform: uppercase;
-    font-size: 1vw;
+    font-size: 20px;
     font-family: 'Coiny';
     padding: 5px 5px 3px 5px;
+    border-radius: 10%;
 }
 .sourcelink:link,
 .sourcelink:visited{
