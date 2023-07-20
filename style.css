@@ -51,7 +51,7 @@ body{
         padding: 0;
     }
     .header button{
-        margin-bottom: 25px;
+        margin-bottom: 2 5px;
     }
     .head{
         flex-direction: column;
@@ -64,6 +64,10 @@ body{
     .header h1{
         font-size: large;
     }
+}
+/* Now you see i used two class in same tag so firstclass is override the SecClass so we used !important in SecClass so their domiance is greater then firstclass so their property is execute  */
+.hidden{
+    display: none !important; 
 }
 .choicefrom{
     background-color:#44403c;
