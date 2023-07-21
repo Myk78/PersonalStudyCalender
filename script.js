@@ -12,3 +12,15 @@ btn.addEventListener("click",function(){
         btn.textContent="Share A Fact";
     }
 });
+// now we make simple function who give a year of fact post
+
+function postyear(year){
+    const curr = new Date().getFullYear();
+    const y = curr-year;
+    if(y>=0){
+        return y;
+    }else{
+        console.log("this impossible");
+    }
+}
+console.log(postyear(2022));
