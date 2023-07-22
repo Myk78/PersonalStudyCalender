@@ -54,3 +54,14 @@ const obj ={
 }
 const{createdIn}=obj;
 console.log(obj.createdIn.toUpperCase());
+
+// foreachloop 
+[2,4,6,8,10].forEach(function(el){
+    console.log(el);
+});
+// map function is use to create a new array idle its not possible in foreach
+const v=[2,4,6,8,10].map(function(el){
+    return 10*el;
+});
+console.log(v);
+
