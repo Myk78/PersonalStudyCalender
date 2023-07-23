@@ -55,6 +55,7 @@ const CATEGORIES = [
   { name: "history", color: "#f97316" },
   { name: "news", color: "#8b5cf6" },
 ];
+// THis is template string function 
 function createdFactslist(data){
   const DataArr= data.map(
     (list) =>`<li class="list"> 
@@ -65,10 +66,32 @@ function createdFactslist(data){
     <span class="ptag" style="background-color: #3b82f6;">
     ${list.category}</span></li>`);
     // now color of every fact is same so now we add color array and change the color in react framework
-  console.log(DataArr);
   const arr = DataArr.join("");
   factlist.insertAdjacentHTML("afterbegin",arr);
 }
+
+
+// load/Fetch data from supabase
+// now we call a sync function its a fast to give you data from databases and other and its give all information about dataTable
+
+
+async function loadfacts(){
+  const response = await fetch("https://ompezwxwarbmplmwesgf.supabase.co/rest/v1/facts",
+  {
+    headers: {
+      apikey:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9tcGV6d3h3YXJibXBsbXdlc2dmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODk3MjMyMDksImV4cCI6MjAwNTI5OTIwOX0.sKubOhCCVR1WZRg2m2LnGUIgNPfVgUS000h0WBhplL4",
+      authorization:
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9tcGV6d3h3YXJibXBsbXdlc2dmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODk3MjMyMDksImV4cCI6MjAwNTI5OTIwOX0.sKubOhCCVR1WZRg2m2LnGUIgNPfVgUS000h0WBhplL4",
+    },
+  });
+  // json is data format same as like Js Object and convert tha data in read able for human
+  const data = await response.json();
+  // console.log(data);
+  createdFactslist(data);
+}
+loadfacts();
+
 
 
 
