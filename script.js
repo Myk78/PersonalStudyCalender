@@ -37,11 +37,41 @@ const initialFacts = [
 const factlist=document.querySelector(".factlist");
 // Creating DOM Element render fact in list
 factlist.innerHTML="";
-const DataArr= initialFacts.map(
-    (list) =>`<li class="list">${list.text}</li>`);
+// create a =function so we call him dynamicly so we dn't use initialFacts every time..
+
+// now first if we create a function so we store the data in then make it
+createdFactslist(initialFacts); // now you see i store the data first in function and also its called a declare
+
+
+
+// color array
+const CATEGORIES = [
+  { name: "technology", color: "#3b82f6" },
+  { name: "science", color: "#16a34a" },
+  { name: "finance", color: "#ef4444" },
+  { name: "society", color: "#eab308" },
+  { name: "entertainment", color: "#db2777" },
+  { name: "health", color: "#14b8a6" },
+  { name: "history", color: "#f97316" },
+  { name: "news", color: "#8b5cf6" },
+];
+function createdFactslist(data){
+  const DataArr= data.map(
+    (list) =>`<li class="list"> 
+    <p>
+    ${list.text}
+    <span><a class="sourcelink" href="${list.source}" target="_blank">(Source)</a></span>
+    </p>
+    <span class="ptag" style="background-color: #3b82f6;">
+    ${list.category}</span></li>`);
+    // now color of every fact is same so now we add color array and change the color in react framework
   console.log(DataArr);
   const arr = DataArr.join("");
   factlist.insertAdjacentHTML("afterbegin",arr);
+}
+
+
+
 
 const btn = document.querySelector(".btn-open");
 const form = document.querySelector(".choicefrom");

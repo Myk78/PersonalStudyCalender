@@ -1,0 +1,13 @@
+data ko arr say say fetch karna or us ko page pay show karwa 
+
+code
+const factlist=document.querySelector(".factlist");
+// Creating DOM Element render fact in list
+factlist.innerHTML="";
+// initialfacts array h 
+
+const DataArr= initialFacts.map(
+    (list) =>`<li class="list">${list.text}</li>`);
+  console.log(DataArr);
+  const arr = DataArr.join("");
+  factlist.insertAdjacentHTML("afterbegin",arr);
