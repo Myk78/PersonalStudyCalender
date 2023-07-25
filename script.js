@@ -55,6 +55,13 @@ const CATEGORIES = [
   { name: "history", color: "#f97316" },
   { name: "news", color: "#8b5cf6" },
 ];
+// now use a find function on this 
+console.log(CATEGORIES.find((list)=>list.name==='finance').color);
+// if your put new value of whole condition so it show new value only like i put color on whole so is show only color value
+
+
+
+
 // THis is template string function 
 function createdFactslist(data){
   const DataArr= data.map(
@@ -87,10 +94,29 @@ async function loadfacts(){
   });
   // json is data format same as like Js Object and convert tha data in read able for human
   const data = await response.json();
+  // Now add some filter in database data
+  // const filterdata = data.filter((list)=>list.category=== "technology");
+  // createdFactslist(filterdata);
+
+
+
+
+
   // console.log(data);
   createdFactslist(data);
 }
 loadfacts();
+// filter function
+// filter function in array is used to filter data from database or large data
+const ab =[2,14,16,-6,10,-20].filter((el)=>el>10);
+console.log(ab); 
+//and filter show the output in new array only show that value who meet the condition
+
+// Find Function
+// is similar as Filter but in now show the data in array form it only show the first value in dataset
+const ac =[2,14,16,-6,10,-20].find((el)=>el>10);
+console.log(ac); 
+// now its only show first greater value of 10
 
 
 
@@ -110,8 +136,19 @@ btn.addEventListener("click",function(){
         btn.textContent="Share A Fact";
     }
 });
-// now we make simple function who give a year of fact post
 
+
+
+
+
+
+
+
+
+
+
+
+// now we make simple function who give a year of fact post
 function postyear(year){
     const curr = new Date().getFullYear();
     const y = curr-year;
@@ -121,7 +158,16 @@ function postyear(year){
         return `this impossible year. Year needs be equal or less then current year ${curr}`;
     }
 }
-console.log(postyear(2022));
+// console.log(postyear(2022));
+
+
+
+
+
+
+
+
+
 
 // Arrow function is second type to write a function but in one line
 // const postyear1 = (year) => 2023 -year; this is one line function it dn't take any condition
@@ -136,7 +182,7 @@ const totalvote = interstingVote + MindblowingVote;
 let falseVote = 8
 // turnay operator is here
 const mes = totalvote > falseVote ? "The fact is true":"Might be the fact is false";
-console.log(mes);
+// console.log(mes);
 
 // String 
 /* In string we study templatestring is for this we `` this symbol in templatestring we also add variable and function
@@ -144,23 +190,24 @@ console.log(mes);
 
 let text = "Portugal hold world best player in football";
 const temp = `The fact is "${text}" ${postyear(2019)}`; // now you see i add variable and function both in template
-console.log(temp);
+// console.log(temp);
 
-// Object
+// Object in js
 const obj ={
     createdIn:"je",
 
 }
+// make a structure in object
 const{createdIn}=obj;
 console.log(obj.createdIn.toUpperCase());
 
 // foreachloop 
 [2,4,6,8,10].forEach(function(el){
-    console.log(el);
+    // console.log(el);
 });
 // map function is use to create a new array idle its not possible in foreach
 const v=[2,4,6,8,10].map(function(el){
     return 10*el;
 });
-console.log(v);
+// console.log(v);
 
