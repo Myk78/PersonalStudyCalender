@@ -1,0 +1,198 @@
+  @import url('https://fonts.googleapis.com/css2?family=Coiny&family=Sono&family=Ubuntu:wght@300&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #292524;
+    color: #fafaf9;
+    font-family: "Sono",sans-serif;
+    box-sizing: border-box;
+    padding: 40px;
+
+}
+.container{
+    max-width: 1500px ;
+    margin: 0 auto;
+    
+}
+/* Header */
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 3vw; */
+}
+.header img{
+    margin-top: 1vh;
+}
+.head{
+    display: flex;
+    gap: 16px;
+}
+  h1{
+    font-size: 5vh;
+    text-transform: uppercase;
+    font-family: 'Coiny', sans-serif;
+    margin-bottom: 2vh;
+    padding: 16px;
+}
+/* Media Qurey */
+@media(max-width:640px){
+    .body{
+        padding: 10px;
+    }
+    .header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header h1{
+        margin-bottom: 1vh;
+        padding: 0;
+    }
+    .header button{
+        margin-bottom: 2 5px;
+    }
+    .head{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* another media for H1  */
+@media(max-width:420px){
+    .header h1{
+        font-size: large;
+    }
+}
+/* Now you see i used two class in same tag so firstclass is override the SecClass so we used !important in SecClass so their domiance is greater then firstclass so their property is execute  */
+.hidden{
+    display: none !important; 
+}
+.choicefrom{
+    background-color:#44403c;
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+.choicefrom span{
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 20px;
+}
+.choicefrom input{
+    background-color: #78716c;
+    border: none;
+    border-radius: 10px;
+    padding: 2vh 1vw;
+    color: inherit;
+    /* width: 20vw; */
+}
+/*  Now we use flex property "flex grow" for his first child to take all extra space of their parent */
+.choicefrom input:first-child{
+    flex-grow: 1;
+}
+.choicefrom select{
+    background-color: #78716c;
+    border: none;
+    border-radius: 10px;
+    padding: 2vh 1vw;
+    color: inherit;
+    width: 10vw;
+}
+/* Media query for form */
+@media(max-width:890px){
+    .choicefrom{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .choicefrom select{
+        width: auto;
+    }
+}
+
+/* MAin */
+/* NOW We add media Quries individual for every class */
+.main{
+    display: grid;
+    grid-template-columns: 250px auto;
+    gap: 50px;
+}
+@media(max-width:640px){
+    .main{
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Media Query */
+.list{
+    font-size: 19px;
+    line-height: 1.4;
+    background-color: #44403c;
+    margin-bottom: 1.5vw;
+    padding: 16px;
+    display: flex;    
+    align-items: center; 
+    gap: 3vw;
+}
+@media(max-width:1340px){
+    .list{
+        flex-direction: column;
+         /*now every property of flex will change means their main axis convert in cross  */
+         /* so align-items work on now horizontal */
+         align-items: flex-end;
+    }
+/* this is tag class of list */
+    .ptag{
+        border-radius: 10%;
+    }
+}
+
+.reaction-btn{
+    margin-left: auto;
+    display: flex;
+    flex-shrink: 0 ;
+    gap: 1vw;
+    
+}
+.reaction-btn button{
+    background-color:#78716c ;
+    border: none;
+    border-radius: 10px;
+    color: inherit;
+    padding: 2px 8px;
+    font-size: 2vh;
+    font-family: inherit;
+    font-weight: 600;
+    transition: 0.3s;
+
+}
+.reaction-btn button:hover{
+    background-color: #57534e;
+}
+.ptag{
+    text-transform: uppercase;
+    font-size: 20px;
+    font-family: 'Coiny';
+    padding: 5px 5px 3px 5px;
+    border-radius: 10%;
+}
+.sourcelink:link,
+.sourcelink:visited{
+    color:#a8a29e;
+    text-decoration: none;
+    transition:0.3s;
+
+}
+.sourcelink:hover,
+.sourcelink:active{
+    color: #3b82f6;
+}
+
+ul{
+    list-style: none;
+}
