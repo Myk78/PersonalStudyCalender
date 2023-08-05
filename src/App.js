@@ -12,14 +12,21 @@ function App(){
 <button className="btn btn-large btn-open ">Share a Fact</button>
 </header>
 <ChoiceFrom/>
+<main class="main">
+<Category/>
+<Factlist/>
+</main>
 </>
   );
-}
+} 
 function ChoiceFrom(){
-  return(
-  <form class="choicefrom hidden ">
-       fact form
-    </form>
-  );
+  return<form className="choicefrom">fact form</form>;    
+  // <aside>hello jdfkdkfnkds </aside>
 }
-export default App;
+function Category(){
+  return <aside>Category filter</aside>;
+}
+function Factlist(){
+  return <section>Factlist</section>;
+}
+export default App; 
