@@ -49,7 +49,7 @@ const initialFacts = [
 
 
 
-function App(){
+function App(){   
   return (
     <>
    <header className="header">
@@ -60,7 +60,7 @@ function App(){
 <button className="btn btn-large btn-open ">Share a Fact</button>
 </header>
 <ChoiceFrom/>
-<main class="main">
+<main className="main">
 <Category/>
 <Factlist/>
 </main>
@@ -94,10 +94,33 @@ function Factlist(){
                 <button>⛔️{fact.votesFalse}</button>
                 </div>
             </li>
+
+
+
+
+        // this is props but i dn,t understand why he dn,t work so i use above and comment this  if this so change the "(" map function with this "{"
+        // <Fact fact={fact} key={fact.id}/>
       ))
     }
     </ul>
     </section>;
-  
-}
+} 
+
+
+//  this fact is make for conspect of props to create a every fact as a component but does work so comment this
+// function Fact({fact}){
+//   return <li  className="list">
+//   <p>
+//       {fact.text}
+//       <span><a className="sourcelink" href={fact.source} target="_blank">(Source)</a></span>
+//   </p>
+//       <span className="ptag" style={{backgroundColor: CATEGORIES.find((cat)=> cat.name==fact.category).color}}>{fact.category}</span>
+
+//    <div className="reaction-btn">
+//     <button>👍{fact.votesInteresting}</button>
+//     <button>🤯{fact.votesMindblowing}</button>
+//     <button>⛔️{fact.votesFalse}</button>
+//   </div>
+// </li>
+// }
 export default App; 
