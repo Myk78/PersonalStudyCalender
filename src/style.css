@@ -30,7 +30,7 @@ body{
     display: flex;
     gap: 16px;
 }
-  h1{
+h1{
     font-size: 5vh;
     text-transform: uppercase;
     font-family: 'Coiny', sans-serif;
