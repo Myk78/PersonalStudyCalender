@@ -36,12 +36,14 @@ const initialFacts = [
   },
 ];
 
-function App(){   
+function App(){  
+  // three part of state first define state var 
   const [show,setshow]=useState(false);
   return (
     <>
-{/* <Counter/> */}
+{/* now we create instance of show setshow in Header */}
 < Header show={show} setshow={setshow}/>
+{/* Second declare state vr */}
 {show ? <ChoiceFrom/> : null}
 <main className="main">
 <Category/>
