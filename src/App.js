@@ -80,6 +80,20 @@ const CATEGORIES = [
   { name: "history", color: "#f97316" },
   { name: "news", color: "#8b5cf6" },
 ];
+// function to valid url is actually url or it string
+function isValidHttpUrl(string) {
+  let url;
+  
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+
 function ChoiceFrom(){
   const [text,settext]=useState("");
   const [source,setsource]=useState("");
@@ -87,8 +101,29 @@ function ChoiceFrom(){
   const textlength =text.length;
  
   function handleSubmit(e) {
+    // 1. Prevent browser reload
     e.preventDefault();
     console.log(text,source,category)
+
+
+    // 2. Check if data is valid. If so,create a new fact
+    if(text&&isValidHttpUrl(source)&&category&&textlength<=200){
+      console.log("the data is valid");
+    }
+
+
+
+    // 3. Create a new Fact object
+    const newFact={
+      id:  Math.round(Math.random()*10000),
+      text,
+      source,
+      category,
+      votesInteresting: 24,
+      votesMindblowing: 9,
+      votesFalse: 4,
+      createdIn: new Date().getCurrentYear(),
+    }
   }
   return(
     <form className="choicefrom" onSubmit={handleSubmit}>
