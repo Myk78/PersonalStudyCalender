@@ -70,11 +70,6 @@ function Counter(){
     </div>
   );
 }
-
-function ChoiceFrom(){
-  return<form className="choicefrom">fact form</form>;    
-  // <aside>hello jdfkdkfnkds </aside>
-}
 const CATEGORIES = [
   { name: "technology", color: "#3b82f6" },
   { name: "science", color: "#16a34a" },
@@ -85,6 +80,30 @@ const CATEGORIES = [
   { name: "history", color: "#f97316" },
   { name: "news", color: "#8b5cf6" },
 ];
+function ChoiceFrom(){
+  const [text,settext]=useState("");
+  const [source,setsource]=useState("");
+  const [category,setcategory]=useState("");
+  const textlength =text.length;
+ 
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(text,source,category)
+  }
+  return(
+    <form className="choicefrom" onSubmit={handleSubmit}>
+    <input type="text" placeholder="Share a fact with a world..." value={text} onChange={(e)=>settext(e.target.value)}/>
+    <span>{200-textlength}</span>
+    <input type="text" placeholder="Trustworthly spruce...."value={source} onChange={(e)=>setsource(e.target.value)}/>
+    <select name="" id=""value={category} onChange={(e)=>setcategory(e.target.value)}>
+        <option value="">Categories</option>
+        {CATEGORIES.map((cate)=>(<option key={cate.name} value={cate.name}>{cate.name.toUpperCase()}</option>))}
+    </select>
+    <button className="btn btn-large">post</button>
+</form>
+  );   
+} 
+
 
 function Category(){
   return <aside>
