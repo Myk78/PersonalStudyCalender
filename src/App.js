@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import supabase from "./supabase";
 import "./style.css";
 import"./utility.css";
 
@@ -39,15 +40,26 @@ const initialFacts = [
 function App(){  
   // three part of state first define state var 
   const [show,setshow]=useState(false);
+  const [fact, setfact] = useState(initialFacts);
+  useEffect( function () {
+    async function getfacts(){
+      const { data: facts, error } = await supabase
+      .from("facts")
+      .select("*");
+      console.log(facts);
+          }
+       getfacts();
+  },[]);
+ 
   return (
     <>
 {/* now we create instance of show setshow in Header */}
 < Header show={show} setshow={setshow}/>
 {/* Second declare state vr */}
-{show ? <ChoiceFrom/> : null}
+{show ? <ChoiceFrom setfact={setfact} setshow={setshow}/> : null}
 <main className="main">
 <Category/>
-<Factlist/>
+<Factlist fact={fact}/>
 </main>
 </>
   );
@@ -93,10 +105,9 @@ function isValidHttpUrl(string) {
   return url.protocol === "http:" || url.protocol === "https:";
 }
 
-
-function ChoiceFrom(){
+function ChoiceFrom({setfact, setshow}){
   const [text,settext]=useState("");
-  const [source,setsource]=useState("");
+  const [source,setsource]=useState("https:example.com");
   const [category,setcategory]=useState("");
   const textlength =text.length;
  
@@ -122,8 +133,19 @@ function ChoiceFrom(){
       votesInteresting: 24,
       votesMindblowing: 9,
       votesFalse: 4,
-      createdIn: new Date().getCurrentYear(),
+      createdIn: new Date().getFullYear(),
     }
+
+    // 4. Add the new fact to the Ui: add the fact to state
+    setfact((fact)=>[newFact, ...fact]);
+    // 5. React input fields
+    settext("");
+    setsource("");
+    setcategory("");
+    
+    // 6. close the from 
+    setshow(false);
+
   }
   return(
     <form className="choicefrom" onSubmit={handleSubmit}>
@@ -154,9 +176,9 @@ function Category(){
   </ul>
   </aside>;
 }
-function Factlist(){
+function Factlist({fact}){
   // temporary
-  const fact = initialFacts;
+  
 
   return <section>
     <ul className="factlist">{
