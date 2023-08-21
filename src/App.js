@@ -197,6 +197,9 @@ function Category({setCurrentCategory}){
 }
 function Factlist({fact}){
   // temporary
+  if(fact.length===0){
+    return<p className="message">There is no fact in category! Create the first one ☺</p>
+  }
   
 
   return <section>
