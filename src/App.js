@@ -41,15 +41,30 @@ function App(){
   // three part of state first define state var 
   const [show,setshow]=useState(false);
   const [fact, setfact] = useState(initialFacts);
+  const [isloading, setisloading]=useState(false);
+  const[CurrentCategory,setCurrentCategory]=useState("all");
   useEffect( function () {
+    let query = supabase
+    .from("facts")
+    .select("*");
+    if(CurrentCategory!=="all")
+    query=query.eq("category",CurrentCategory)
     async function getfacts(){
-      const { data: facts, error } = await supabase
-      .from("facts")
-      .select("*");
+      setisloading(true);
+      const { data: facts, error } = await query
+      .order("votesInteresting",{ascending:false})
+      .limit(1000);
+
+      // error handler
+      if(!error) setfact(facts);
+      else alert("there is a problem in getting data");
       console.log(facts);
+      setfact(facts)
+      setisloading(false);
           }
        getfacts();
-  },[]);
+       
+  },[CurrentCategory]);
  
   return (
     <>
@@ -58,12 +73,15 @@ function App(){
 {/* Second declare state vr */}
 {show ? <ChoiceFrom setfact={setfact} setshow={setshow}/> : null}
 <main className="main">
-<Category/>
-<Factlist fact={fact}/>
+<Category setCurrentCategory={setCurrentCategory}/>
+{isloading?<Loader/>:<Factlist fact={fact}/>}
 </main>
 </>
   );
 } 
+function Loader(){
+  return <p className="message">Loading...</p>
+}
 function Header({show,setshow}){
   return( <header className="header">
   <div className="head">
@@ -107,7 +125,7 @@ function isValidHttpUrl(string) {
 
 function ChoiceFrom({setfact, setshow}){
   const [text,settext]=useState("");
-  const [source,setsource]=useState("https:example.com");
+  const [source,setsource]=useState("https://example.com");
   const [category,setcategory]=useState("");
   const textlength =text.length;
  
@@ -162,15 +180,16 @@ function ChoiceFrom({setfact, setshow}){
 } 
 
 
-function Category(){
+function Category({setCurrentCategory}){
   return <aside>
     <ul>
              <li>
-                <button className="btn btn-forall">ALL</button>
+                <button className="btn btn-forall" onClick={()=>setCurrentCategory("all")}>ALL</button>
             </li>
              {CATEGORIES.map((cat) =>
               <li key={cat.name}>
-              <button  className="btn btn-forother tech" style={{backgroundColor:cat.color}}>{cat.name}
+              <button  className="btn btn-forother tech" style={{backgroundColor:cat.color}}
+              onClick={()=>setCurrentCategory(cat.name)}>{cat.name}
               </button>
           </li>)}
   </ul>

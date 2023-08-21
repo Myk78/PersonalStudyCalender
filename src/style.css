@@ -69,6 +69,13 @@ h1{
 .hidden{
     display: none !important; 
 }
+.message{
+    text-align: center;
+    font-family: "Sono";
+    font-weight: 600px;
+    margin-top: 22px;
+    font-size: 32px;
+}
 .choicefrom{
     background-color:#44403c;
     border-radius: 10px;
