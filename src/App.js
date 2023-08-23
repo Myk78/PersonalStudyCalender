@@ -100,7 +100,8 @@ function Counter(){
     </div>
   );
 }
-const CATEGORIES = [
+const CATEGORIE = [
+  // { name: "All", color: "#3b82f6" },
   { name: "technology", color: "#3b82f6" },
   { name: "science", color: "#16a34a" },
   { name: "finance", color: "#ef4444" },
@@ -127,9 +128,10 @@ function ChoiceFrom({setfact, setshow}){
   const [text,settext]=useState("");
   const [source,setsource]=useState("https://example.com");
   const [category,setcategory]=useState("");
+  const [isUploading,setisUploading]=useState(false);
   const textlength =text.length;
  
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     // 1. Prevent browser reload
     e.preventDefault();
     console.log(text,source,category)
@@ -142,7 +144,8 @@ function ChoiceFrom({setfact, setshow}){
 
 
 
-    // 3. Create a new Fact object
+    // 3. Create a new Fact object the data of this fact is in array that write in above and its work statically
+
     const newFact={
       id:  Math.round(Math.random()*10000),
       text,
@@ -153,6 +156,20 @@ function ChoiceFrom({setfact, setshow}){
       votesFalse: 4,
       createdIn: new Date().getFullYear(),
     }
+
+    // 3.1 Now uploade the fact in supabase and receive the new fact
+    // setisUploading(true);
+    //   const { data: newFact, error } = await supabase
+    //   .from('facts')
+    //   .insert([
+    //     { text, source, category},
+    //   ])
+    //   .select();
+    //   setisUploading(false);
+
+
+     console.log(newFact);
+
 
     // 4. Add the new fact to the Ui: add the fact to state
     setfact((fact)=>[newFact, ...fact]);
@@ -167,14 +184,22 @@ function ChoiceFrom({setfact, setshow}){
   }
   return(
     <form className="choicefrom" onSubmit={handleSubmit}>
-    <input type="text" placeholder="Share a fact with a world..." value={text} onChange={(e)=>settext(e.target.value)}/>
+    <input 
+    type="text" placeholder="Share a fact with a world..." value={text} onChange={(e)=>settext(e.target.value)} disabled={isUploading}/>
     <span>{200-textlength}</span>
-    <input type="text" placeholder="Trustworthly spruce...."value={source} onChange={(e)=>setsource(e.target.value)}/>
-    <select name="" id=""value={category} onChange={(e)=>setcategory(e.target.value)}>
+    <input 
+    type="text" placeholder="Trustworthly spruce...."value={source} onChange={(e)=>setsource(e.target.value)}
+    disabled={isUploading}/>
+    <select 
+    value={category}
+     onChange={(e)=>setcategory(e.target.value)}
+     disabled={isUploading}>
         <option value="">Categories</option>
-        {CATEGORIES.map((cate)=>(<option key={cate.name} value={cate.name}>{cate.name.toUpperCase()}</option>))}
+        {CATEGORIE.map((cate)=>(<option key={cate.name} value={cate.name}>
+          {cate.name.toUpperCase()}
+        </option>))}
     </select>
-    <button className="btn btn-large">post</button>
+    <button className="btn btn-large" disabled={isUploading}>post</button>
 </form>
   );   
 } 
@@ -186,7 +211,7 @@ function Category({setCurrentCategory}){
              <li>
                 <button className="btn btn-forall" onClick={()=>setCurrentCategory("all")}>ALL</button>
             </li>
-             {CATEGORIES.map((cat) =>
+             {CATEGORIE.map((cat) =>
               <li key={cat.name}>
               <button  className="btn btn-forother tech" style={{backgroundColor:cat.color}}
               onClick={()=>setCurrentCategory(cat.name)}>{cat.name}
@@ -197,6 +222,7 @@ function Category({setCurrentCategory}){
 }
 function Factlist({fact}){
   // temporary
+  // const facts = initialFacts;
   if(fact.length===0){
     return<p className="message">There is no fact in category! Create the first one ☺</p>
   }
@@ -210,7 +236,12 @@ function Factlist({fact}){
                     {fact.text}
                     <span><a className="sourcelink" href={fact.source} target="_blank">(Source)</a></span>
                 </p>
-                <span className="ptag" style={{backgroundColor: CATEGORIES.find((cat)=> cat.name==fact.category).color}}>{fact.category}</span>
+                <span className="ptag" 
+                 style={{
+                  backgroundColor: CATEGORIE.find((cat)=>cat.name === fact.category).color 
+                    }}>
+                      {fact.category}
+                </span>
 
                 <div className="reaction-btn">
                 <button>👍{fact.votesInteresting}</button>
