@@ -74,7 +74,7 @@ function App(){
 {show ? <ChoiceFrom setfact={setfact} setshow={setshow}/> : null}
 <main className="main">
 <Category setCurrentCategory={setCurrentCategory}/>
-{isloading?<Loader/>:<Factlist fact={fact}/>}
+{isloading?<Loader/>:<Factlist fact={fact} setfact={setfact}/>}
 </main>
 </>
   );
@@ -100,7 +100,7 @@ function Counter(){
     </div>
   );
 }
-const CATEGORIE = [
+const CATEGORIES = [
   // { name: "All", color: "#3b82f6" },
   { name: "technology", color: "#3b82f6" },
   { name: "science", color: "#16a34a" },
@@ -146,33 +146,34 @@ function ChoiceFrom({setfact, setshow}){
 
     // 3. Create a new Fact object the data of this fact is in array that write in above and its work statically
 
-    const newFact={
-      id:  Math.round(Math.random()*10000),
-      text,
-      source,
-      category,
-      votesInteresting: 24,
-      votesMindblowing: 9,
-      votesFalse: 4,
-      createdIn: new Date().getFullYear(),
-    }
+    // const newFact={
+    //   id:  Math.round(Math.random()*10000),
+    //   text,
+    //   source,
+    //   category,
+    //   votesInteresting: 24,
+    //   votesMindblowing: 9,
+    //   votesFalse: 4,
+    //   createdIn: new Date().getFullYear(),
+    // }
 
     // 3.1 Now uploade the fact in supabase and receive the new fact
-    // setisUploading(true);
-    //   const { data: newFact, error } = await supabase
-    //   .from('facts')
-    //   .insert([
-    //     { text, source, category},
-    //   ])
-    //   .select();
-    //   setisUploading(false);
+    setisUploading(true);
+      const { data: newFact, error } = await supabase
+      .from('facts')
+      .insert([
+        { text, source, category},
+      ])
+      .select();
+      setisUploading(false);
 
 
      console.log(newFact);
 
 
     // 4. Add the new fact to the Ui: add the fact to state
-    setfact((fact)=>[newFact, ...fact]);
+    if(!error) setfact((fact)=>[newFact[0], ...fact]);
+    
     // 5. React input fields
     settext("");
     setsource("");
@@ -195,7 +196,7 @@ function ChoiceFrom({setfact, setshow}){
      onChange={(e)=>setcategory(e.target.value)}
      disabled={isUploading}>
         <option value="">Categories</option>
-        {CATEGORIE.map((cate)=>(<option key={cate.name} value={cate.name}>
+        {CATEGORIES.map((cate)=>(<option key={cate.name} value={cate.name}>
           {cate.name.toUpperCase()}
         </option>))}
     </select>
@@ -211,7 +212,7 @@ function Category({setCurrentCategory}){
              <li>
                 <button className="btn btn-forall" onClick={()=>setCurrentCategory("all")}>ALL</button>
             </li>
-             {CATEGORIE.map((cat) =>
+             {CATEGORIES.map((cat) =>
               <li key={cat.name}>
               <button  className="btn btn-forother tech" style={{backgroundColor:cat.color}}
               onClick={()=>setCurrentCategory(cat.name)}>{cat.name}
@@ -220,35 +221,17 @@ function Category({setCurrentCategory}){
   </ul>
   </aside>;
 }
-function Factlist({fact}){
+function Factlist({fact,setfact}){
   // temporary
   // const facts = initialFacts;
   if(fact.length===0){
     return<p className="message">There is no fact in category! Create the first one ☺</p>
   }
-  
-
   return <section>
     <ul className="factlist">{
       fact.map((fact)=>(
-         <li key={fact.id} className="list">
-                <p>
-                    {fact.text}
-                    <span><a className="sourcelink" href={fact.source} target="_blank">(Source)</a></span>
-                </p>
-                <span className="ptag" 
-                 style={{
-                  backgroundColor: CATEGORIE.find((cat)=>cat.name === fact.category).color 
-                    }}>
-                      {fact.category}
-                </span>
-
-                <div className="reaction-btn">
-                <button>👍{fact.votesInteresting}</button>
-                <button>🤯{fact.votesMindblowing}</button>
-                <button>⛔️{fact.votesFalse}</button>
-                </div>
-            </li>
+         <Fact key={fact.id} fact={fact} setfact={setfact}/>
+                
 
 
 
@@ -258,24 +241,35 @@ function Factlist({fact}){
       ))
     }
     </ul>
-    </section>;
+    <p>There are {fact.length} facts in the database, Add your own!</p>
+    </section>
 } 
 
 
 //  this fact is make for conspect of props to create a every fact as a component but does work so comment this
-// function Fact({fact}){
-//   return <li  className="list">
-//   <p>
-//       {fact.text}
-//       <span><a className="sourcelink" href={fact.source} target="_blank">(Source)</a></span>
-//   </p>
-//       <span className="ptag" style={{backgroundColor: CATEGORIES.find((cat)=> cat.name==fact.category).color}}>{fact.category}</span>
+function Fact({fact,setfact}){
 
-//    <div className="reaction-btn">
-//     <button>👍{fact.votesInteresting}</button>
-//     <button>🤯{fact.votesMindblowing}</button>
-//     <button>⛔️{fact.votesFalse}</button>
-//   </div>
-// </li>
-// }
+  async function handlevote(){
+    const {data:updatefact,error}= await supabase.from('facts')
+    .update({votesInteresting:fact.votesInteresting+1})
+    .eq("id",fact.id)
+    .select();
+    console.log(updatefact);
+    if(!error)
+     setfact((fact) => fact.map((f)=>f.id === fact.id ? updatefact[0] : f)); 
+  }
+  return <li  className="list">
+  <p>
+      {fact.text}
+      <span><a className="sourcelink" href={fact.source} target="_blank">(Source)</a></span>
+  </p>
+      <span className="ptag" style={{backgroundColor: CATEGORIES.find((cat)=> cat.name==fact.category).color}}>{fact.category}</span>
+
+   <div className="reaction-btn">
+    <button onClick={handlevote}>👍{fact.votesInteresting}</button>
+    <button>🤯{fact.votesMindblowing}</button>
+    <button>⛔️{fact.votesFalse}</button>
+  </div>
+</li>
+}
 export default App; 
