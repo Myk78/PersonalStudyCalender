@@ -181,6 +181,9 @@ h1{
 .reaction-btn button:hover{
     background-color: #57534e;
 }
+.reaction-btn button:disabled{
+    background-color: #353322;
+}
 .ptag{
     text-transform: uppercase;
     font-size: 20px;

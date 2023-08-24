@@ -248,13 +248,16 @@ function Factlist({fact,setfact}){
 
 //  this fact is make for conspect of props to create a every fact as a component but does work so comment this
 function Fact({fact,setfact}){
+  const [isUpdating,setisUpdating]=useState(false);
 
-  async function handlevote(){
+  async function handlevote(columnName){
+    setisUpdating(true);
     const {data:updatefact,error}= await supabase.from('facts')
-    .update({votesInteresting:fact.votesInteresting+1})
+    .update({[columnName]:fact[columnName] + 1})
     .eq("id",fact.id)
     .select();
-    console.log(updatefact);
+    setisUpdating(false);
+    // console.log(updatefact);
     if(!error)
      setfact((fact) => fact.map((f)=>f.id === fact.id ? updatefact[0] : f)); 
   }
@@ -266,9 +269,15 @@ function Fact({fact,setfact}){
       <span className="ptag" style={{backgroundColor: CATEGORIES.find((cat)=> cat.name==fact.category).color}}>{fact.category}</span>
 
    <div className="reaction-btn">
-    <button onClick={handlevote}>👍{fact.votesInteresting}</button>
-    <button>🤯{fact.votesMindblowing}</button>
-    <button>⛔️{fact.votesFalse}</button>
+    <button 
+    onClick={()=>handlevote("votesInteresting")} disabled={isUpdating}>
+      👍{fact.votesInteresting}</button>
+    <button
+    onClick={()=>handlevote("votesMindblowing")} disabled={isUpdating}
+    >🤯{fact.votesMindblowing}</button>
+    <button
+    onClick={()=>handlevote("votesfalse")} disabled={isUpdating}
+    >⛔️{fact.votesFalse}</button>
   </div>
 </li>
 }
