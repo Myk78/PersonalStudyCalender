@@ -249,6 +249,7 @@ function Factlist({fact,setfact}){
 //  this fact is make for conspect of props to create a every fact as a component but does work so comment this
 function Fact({fact,setfact}){
   const [isUpdating,setisUpdating]=useState(false);
+  const isDisputed = fact.votesInteresting + fact.votesMindblowing < fact.votesFalse;
 
   async function handlevote(columnName){
     setisUpdating(true);
@@ -263,6 +264,7 @@ function Fact({fact,setfact}){
   }
   return <li  className="list">
   <p>
+    {isDisputed ? <span className="Disputed">[🔴⛔️Disputed]</span>:null}
       {fact.text}
       <span><a className="sourcelink" href={fact.source} target="_blank">(Source)</a></span>
   </p>
@@ -274,9 +276,9 @@ function Fact({fact,setfact}){
       👍{fact.votesInteresting}</button>
     <button
     onClick={()=>handlevote("votesMindblowing")} disabled={isUpdating}
-    >🤯{fact.votesMindblowing}</button>
+    >🤯{fact.votesMindblowing}</button>  
     <button
-    onClick={()=>handlevote("votesfalse")} disabled={isUpdating}
+    onClick={()=>handlevote("votesFalse")} disabled={isUpdating}
     >⛔️{fact.votesFalse}</button>
   </div>
 </li>

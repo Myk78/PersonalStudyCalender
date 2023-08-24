@@ -8,9 +8,10 @@ body{
     color: #fafaf9;
     font-family: "Sono",sans-serif;
     box-sizing: border-box;
-    padding: 40px;
+    padding: 40px 40px 0px;
 
 }
+/* Main layout */
 #root{
     max-width: 1500px ;
     margin: 0 auto;
@@ -40,7 +41,7 @@ h1{
 /* Media Qurey */
 @media(max-width:640px){
     .body{
-        padding: 10px;
+        /* padding: 10px; */
     }
     .header{
         flex-direction: column;
@@ -127,11 +128,19 @@ h1{
     display: grid;
     grid-template-columns: 250px auto;
     gap: 50px;
+    /* background-color: red; */
+
+    height: calc(80vh - 40px - 67.21px);
 }
 @media(max-width:640px){
     .main{
         grid-template-columns: 1fr;
+        height: auto;
     }
+}
+section{
+    overflow: scroll;
+    padding-bottom: 40px;
 }
 
 
@@ -202,7 +211,14 @@ h1{
 .sourcelink:active{
     color: #3b82f6;
 }
-
+.Disputed{
+    font-weight: 600;
+    /* background-color: red; */
+    color: red;
+    font-family: inherit;
+    font-size: 26px;
+    margin-right:12px ;
+}
 ul{
     list-style: none;
 }
