@@ -280,6 +280,9 @@ function Fact({fact,setfact}){
     <button
     onClick={()=>handlevote("votesFalse")} disabled={isUpdating}
     >⛔️{fact.votesFalse}</button>
+    {/* <button
+    onClick={()=>handlevote("votesFalse")} disabled={isUpdating}
+    >⛔️{fact.votesFalse}</button> */}
   </div>
 </li>
 }

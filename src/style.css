@@ -85,6 +85,9 @@ h1{
     display: flex;
     align-items: center;
     gap: 1vw;
+    /* display: flex;
+    align-items: center;
+    gap: 1vw; */
 }
 .choicefrom span{
     font-family: inherit;
